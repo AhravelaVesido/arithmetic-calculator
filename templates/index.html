@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arithmetic Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+
+  <body>
+    <div class="card">
+
+      <!--Header-->
+      <div class="header">
+        <p class="subtitle">PYTHON + FLASK</p>
+        <h1>Arithmetic Calculator</h1>
+      </div>
+
+      <!--Display-->
+      <div class="display">
+        <p class="display-label">RESULT</p>
+        <h2 class="display-result">
+          {{ result if result is not none else '—' }}
+        </h2>
+      </div>
+
+      <!--Error-->
+      {% if error %}
+      <div class="error">{{ error }}</div>
+      {% endif %}
+
+      <!--Form-->
+      <form method="POST">
+
+        <div class="input-group">
+          <p>First Number</p>
+          <input type="number" name="num1" placeholder="0" required />
+        </div>
+
+        <div class="input-group">
+          <p>Second Number</p>
+          <input type="number" name="num2" placeholder="0" required />
+        </div>
+
+        <div class="operations">
+          <p>Operation</p>
+          <div class="flex">
+            <button type="button" class="op-btn" onclick="selectOp(this, 'addition')">Addition</button>
+            <button type="button" class="op-btn" onclick="selectOp(this, 'subtraction')">Subtraction</button>
+            <button type="button" class="op-btn" onclick="selectOp(this, 'multiplication')">Multiplication</button>
+            <button type="button" class="op-btn" onclick="selectOp(this, 'division')">Division</button>
+          </div>
+          <input type="hidden" name="operation" id="selected-operation" value="" />
+        </div>
+
+        <div class="calculate">
+          <button type="submit" class="calc-btn">Calculate</button>
+        </div>
+
+      </form>
+
+      <!--Footer-->
+      <div class="footer">
+        <p>Built by Ahravela D. Vesido</p>
+      </div>
+
+    </div>
+
+    <script>
+      function selectOp(btn, value) {
+        document.querySelectorAll('.op-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('selected-operation').value = value;
+      }
+    </script>
+
+  </body>
+</html>
